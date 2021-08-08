@@ -4,13 +4,13 @@ import {
   
   import PrestationDataService from "../services/prestation.service";
   
-  export const retrieveTutorials = () => async (dispatch) => {
+export const retrievePrestations = () => async (dispatch) => {
     try {
       const res = await PrestationDataService.getAll();
-  
+      console.log("youp", res)
       dispatch({
         type: RETRIEVE_PRESTATIONS,
-        payload: res.data,
+        payload: res,
       });
     } catch (err) {
       console.log(err);

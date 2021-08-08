@@ -1,8 +1,9 @@
 import http from "../service-common";
 
+
 class DataService {
   getAll() {
-    return http.get("/universe");
+    return http.get("/universe")
   }
 
 }
