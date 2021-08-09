@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import prestations from "./prestations";
+import universes from "./universes";
 
 export default combineReducers({
-    prestations,
+    universes,
 });

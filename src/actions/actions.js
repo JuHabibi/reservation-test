@@ -1,15 +1,15 @@
 import {
-    RETRIEVE_PRESTATIONS,
+  RETRIEVE_UNIVERSES,
   } from "./types";
   
-  import PrestationDataService from "../services/prestation.service";
+import UniversesDataService from "../services/universes.service";
   
 export const retrievePrestations = () => async (dispatch) => {
     try {
-      const res = await PrestationDataService.getAll();
-      console.log("youp", res)
+      const res = await UniversesDataService.getAll();
+      console.log("youp", res.data)
       dispatch({
-        type: RETRIEVE_PRESTATIONS,
+        type: RETRIEVE_UNIVERSES,
         payload: res,
       });
     } catch (err) {
