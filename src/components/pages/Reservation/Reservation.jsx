@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-import { retrievePrestations } from "../../../actions/actions";
+import Counter from '../../atoms/Counter';
+import Basket from '../../molecules/Basket';
+import { retrievePrestations, addItemPrestations } from "../../../actions/actions";
 
 
-const Reservation = ({ retrievePrestations, universes: { categories = [] } }) => {
-
+const Reservation = ({ retrievePrestations, addItemPrestations, universes: { categories = [] } }) => {
+    const [count, setCount] = useState({ man: 0, woman: 0, child: 0 })
     useEffect(() => {
         let mounted = true
         if (mounted) {
@@ -16,23 +18,39 @@ const Reservation = ({ retrievePrestations, universes: { categories = [] } }) =>
         };
     }, [retrievePrestations]);
 
+    const handleClick = (text) => {
+        addItemPrestations(text);
+    }
 
 
-    const listItems = categories.map((cat, index) =>
-        <li key={index}>{cat.title}</li>
-    );
     return (<>
         {!!categories && (
-            <ul>{listItems}</ul>
+            <div className="container">
+                <div className="container-universes">
+
+                    <form>
+                        {categories.map((cat, index) => (
+                            <>
+                                <div onClick={() => handleClick(cat.title)}>{cat.title}</div>
+                            </>
+                        )
+                        )}
+                    </form>
+
+                </div>
+                <Basket />
+
+            </div>
+
         )}
     </>
     )
-}
 
+}
 
 const mapStateToProps = (state) => {
     return {
         universes: state.universes,
     };
 };
-export default connect(mapStateToProps, { retrievePrestations })(Reservation);
+export default connect(mapStateToProps, { retrievePrestations, addItemPrestations })(Reservation);
